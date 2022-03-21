@@ -36,9 +36,11 @@ router.get("/view-favourites/:userId", usercontroller.viewfavourites);
 
 
 
-/*router.get("/view-Package-list", usercontroller.viewPackage);
+router.get("/view-Package-list", usercontroller.viewPackage);
 
-router.get("/view-Product-list", usercontroller.viewProduct);
+router.get("/available-Package-list", usercontroller.availablePackage);
+
+/*router.get("/view-Product-list", usercontroller.viewProduct);
 
 router.delete("/delete-account/:userId", usercontroller.deleteAccount);
 */

@@ -1,6 +1,7 @@
 const express = require('express');
 const { validationResult } = require('express-validator');
 const Admin = require('../models/admin.model');
+const package = require('../models/package.model');
 const user = require('../models/user.model');;
 const category = require("../models/category.model");
 const food = require('../models/foods.model');
@@ -225,5 +226,21 @@ exports.updateFood = (request, response) => {
             return response.status(404).json({ message: 'record not found' });
     }).catch(err => {
         return response.status(500).json({ message: 'Something went wrong..' });
+    });
+}
+
+exports.addPackage = (request, response) => {
+    package.create({
+        name: request.body.name,
+        price: request.body.price,
+        image: "https://book-my-meal-hurry.herokuapp.com/images/" + request.file.filename,
+        description: request.body.description,
+        quantity: request.body.quantity,
+        day: request.body.day,
+        catId: request.body.catId
+    }).then(result => {
+        return response.status(201).json(result);
+    }).catch(err => {
+        return response.status(500).json(err);
     });
 }

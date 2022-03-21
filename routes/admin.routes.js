@@ -57,6 +57,8 @@ router.post("/edit-food/:foodId",
     body('Description').not().isEmpty(),
     body('discount').not().isEmpty(), adminController.updateFood);
 
+router.post("/add-package", adminController.addPackage);
+
 
 
 module.exports = router;

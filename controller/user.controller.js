@@ -3,8 +3,10 @@ const { validationResult } = require('express-validator');
 const user = require('../models/user.model');
 const cartmodel = require('../models/cart.model');
 const favouritem = require('../models/favourite.model');
+const package = require("../models/package.model");
 const { request } = require("express");
 const { response } = require("express");
+const { json } = require("express/lib/response");
 
 exports.signup = (request, response) => {
 
@@ -34,7 +36,12 @@ exports.signup = (request, response) => {
         from: "officialgourmand@gmail.com",
         to: userEmail,
         subject: "Your login credentials",
-        text: "please use following given credentials to login and surfing in BookmyMeal",
+
+
+        text: JSON.stringify({
+            email: userEmail,
+            password: userPassword
+        })
 
     }
     transporter.sendMail(mailOptions, function(err, success) {
@@ -152,4 +159,52 @@ exports.viewfavourites = (request, response) => {
         }).catch(error => {
             return response.status(500).json({ message: 'Oops! Something went wrong' });
         })
+}
+
+
+
+exports.viewPackage = (request, response) => {
+    package.find(request.body)
+        .then(result => {
+            return response.status(200).json(result);
+        }).catch(err => {
+            return response.status(500).json(err);
+        });
+}
+
+exports.availablePackage = (request, response) => {
+    package.find({ quantity: { $gt: 0 } })
+        .then(result => {
+            return response.status(200).json(result);
+        }).catch(err => {
+            return response.status(500).json(err);
+        });
+}
+
+exports.todayMealOption = (request, response) => {
+    var date = new Date();
+    var day;
+    if (date.getDay() == 0)
+        day = "sunday";
+    else if (date.getDay() == 1)
+        day = "monday";
+    else if (date.getDay() == 2)
+        day = "tuesday";
+    else if (date.getDay() == 3)
+        day = "wednesday";
+    else if (date.getDay() == 4)
+        day = "thursday";
+    else if (date.getDay() == 5)
+        day = "friday";
+    else if (date.getDay() == 6)
+        day = "saturday";
+
+    package.find({ $or: [{ day: { $eq: day } }, { day: 'daily' }] })
+        .then(result => {
+            response.status(200).json(result);
+        })
+        .catch(err => {
+            response.status(500).json(err);
+        });
+
 }
