@@ -4,6 +4,7 @@ const user = require('../models/user.model');
 const cartmodel = require('../models/cart.model');
 const favouritem = require('../models/favourite.model');
 const package = require("../models/package.model");
+const orderModel = require('../models/order.model');
 const { request } = require("express");
 const { response } = require("express");
 const { json } = require("express/lib/response");
@@ -207,4 +208,24 @@ exports.todayMealOption = (request, response) => {
             response.status(500).json(err);
         });
 
+}
+
+exports.place_order = (request, response) => {
+    orderModel.create(request.body)
+        .then(result => {
+            return response.status(201).json(result);
+        })
+        .catch(err => {
+            console.log(err);
+            return response.status(500).json({ err: "OOPS SOMETHING WENT WRONG" });
+        });
+}
+
+exports.viewOrderhistory = (request, response) => {
+    orderModel.findOne({ userId: request.params.uid })
+        .then(result => {
+            return response.status(200).json(result);
+        }).catch(err => {
+            return response.status(500).json(err);
+        })
 }

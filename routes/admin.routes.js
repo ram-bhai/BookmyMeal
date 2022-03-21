@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controller/admin.controller');
+
+const orderController = require("../controller/orderController");
 const { body } = require('express-validator');
 const multer = require('multer');
 
@@ -34,7 +36,7 @@ router.get("/view-category-list", adminController.viewCategory);
 router.delete("/delete-category/:id", adminController.deleteCategory);
 
 router.post("/edit-category/:_id", upload.single('categoryImage'),
-    body('packageName').not().isEmpty(), adminController.updateCategory);
+    body('categoryName').not().isEmpty(), adminController.updateCategory);
 
 router.post("/add-food", upload.array('foodImages'),
     body('foodName').not().isEmpty(),
@@ -52,12 +54,16 @@ router.delete("/delete-food/:foodId", adminController.deleteFood);
 router.post("/edit-food/:foodId",
     upload.array('foodImages'),
     body('foodName').not().isEmpty(),
-    body('Price').not().isEmpty(),
+    body('price').not().isEmpty(),
     body('quantity').not().isEmpty(),
     body('Description').not().isEmpty(),
     body('discount').not().isEmpty(), adminController.updateFood);
 
-router.post("/add-package", adminController.addPackage);
+router.post("/add-package", upload.single('image'), adminController.addPackage);
+
+
+
+router.get("/view-orders/:uid", adminController.viewOrderhistory);
 
 
 

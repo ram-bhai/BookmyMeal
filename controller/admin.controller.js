@@ -5,6 +5,7 @@ const package = require('../models/package.model');
 const user = require('../models/user.model');;
 const category = require("../models/category.model");
 const food = require('../models/foods.model');
+const orderModel = require("../models/order.model");
 
 
 exports.signup = (request, response) => {
@@ -214,7 +215,7 @@ exports.updateFood = (request, response) => {
             foodImageUrl1: foodImageUrl1,
             foodImageUrl2: foodImageUrl2,
             foodImageUrl3: foodImageUrl3,
-            foodPrice: request.body.Price,
+            foodPrice: request.body.price,
             foodQty: request.body.quantity,
             foodDescription: request.body.description,
             foodDiscount: request.body.discount
@@ -243,4 +244,14 @@ exports.addPackage = (request, response) => {
     }).catch(err => {
         return response.status(500).json(err);
     });
+}
+
+
+exports.viewOrderhistory = (request, response) => {
+    orderModel.findOne({ userId: request.params.uid })
+        .then(result => {
+            return response.status(200).json(result);
+        }).catch(err => {
+            return response.status(500).json(err);
+        })
 }

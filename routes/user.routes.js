@@ -40,9 +40,8 @@ router.get("/view-Package-list", usercontroller.viewPackage);
 
 router.get("/available-Package-list", usercontroller.availablePackage);
 
-/*router.get("/view-Product-list", usercontroller.viewProduct);
+router.get("/view-order/:uid", usercontroller.viewOrderhistory);
 
-router.delete("/delete-account/:userId", usercontroller.deleteAccount);
-*/
+router.post("/place-order", usercontroller.place_order);
 
 module.exports = router;
