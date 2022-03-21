@@ -19,6 +19,10 @@ app.use(bodyParser.json());
 // app.use('/cart', cartRouter);
 // app.use("/product", productRouter);
 // app.use("/category", categoryRouter);
+app.get("/", (request, response) => {
+    response.send("Welcome to the world of hungers!!!");
+});
+
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 
