@@ -20,7 +20,8 @@ app.use(bodyParser.json());
 // app.use("/product", productRouter);
 // app.use("/category", categoryRouter);
 app.get("/", (request, response) => {
-    response.render("./feane/index.html");
+    //response.render("/feane/index.html");
+    response.send("Welcome in the world of hungers");
 });
 
 app.use("/user", userRouter);
