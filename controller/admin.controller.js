@@ -60,7 +60,7 @@ exports.addCategory = (request, response) => {
 
     category.create({
             categoryName: request.body.categoryName,
-            categoryImageUrl: "http://localhost:3000/images/" + request.file.filename
+            categoryImageUrl: "https://book-my-meal-hurry.herokuapp.com/images/" + request.file.filename
         })
         .then(result => {
             return response.status(201).json(result);
@@ -105,7 +105,7 @@ exports.updateCategory = (request, response) => {
     category.updateOne({ _id: id }, {
         $set: {
             categoryName: request.body.categoryName,
-            categoryImageUrl: "http://localhost:3000/images/" + request.file.filename,
+            categoryImageUrl: "https://book-my-meal-hurry.herokuapp.com/images/" + request.file.filename,
         }
     }).then(result => {
         if (result.modifiedCount)
@@ -132,11 +132,11 @@ exports.addFood = (request, response) => {
     let foodImageUrl2 = "";
     let foodImageUrl3 = "";
     if (request.files.length > 0) {
-        foodImageUrl1 = "http://localhost:3000/images/" + request.files[0].filename;
+        foodImageUrl1 = "https://book-my-meal-hurry.herokuapp.com/images/" + request.files[0].filename;
         if (request.files.length > 1) {
-            foodImageUrl2 = "http://localhost:3000/images/" + request.files[1].filename;
+            foodImageUrl2 = "https://book-my-meal-hurry.herokuapp.com/images/" + request.files[1].filename;
             if (request.files.length > 2) {
-                foodImageUrl3 = "http://localhost:3000/images/" + request.files[2].filename;
+                foodImageUrl3 = "https://book-my-meal-hurry.herokuapp.com/images/" + request.files[2].filename;
             }
         }
     }
@@ -197,11 +197,11 @@ exports.updateFood = (request, response) => {
     let foodImageUrl2 = "";
     let foodImageUrl3 = "";
     if (request.files.length > 0) {
-        foodImageUrl1 = "http://localhost:3000/images/" + request.files[0].filename;
+        foodImageUrl1 = "https://book-my-meal-hurry.herokuapp.com/images/" + request.files[0].filename;
         if (request.files.length > 1) {
-            foodImageUrl2 = "http://localhost:3000/images/" + request.files[1].filename;
+            foodImageUrl2 = "https://book-my-meal-hurry.herokuapp.com/images/" + request.files[1].filename;
             if (request.files.length > 2) {
-                foodImageUrl3 = "http://localhost:3000/images/" + request.files[2].filename;
+                foodImageUrl3 = "https://book-my-meal-hurry.herokuapp.com/images/" + request.files[2].filename;
 
             }
         }
