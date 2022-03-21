@@ -143,3 +143,13 @@ exports.addtoFavourite = async(request, response) => {
             return response.status(500).json({ message: 'Oops! Something went wrong' });
         })
 }
+
+exports.viewfavourites = (request, response) => {
+    favouritem.findOne({ userId: request.params.userId })
+        .populate("foodList").populate("userId")
+        .then(result => {
+            return response.status(201).json(result)
+        }).catch(error => {
+            return response.status(500).json({ message: 'Oops! Something went wrong' });
+        })
+}

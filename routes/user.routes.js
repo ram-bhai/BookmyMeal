@@ -30,6 +30,8 @@ router.post("/add-favourite",
     body('userId').not().isEmpty(),
     body('foodId').not().isEmpty(), usercontroller.addtoFavourite);
 
+router.get("/view-favourites/:userId", usercontroller.viewfavourites);
+
 
 
 
