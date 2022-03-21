@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+const port = process.env.PORT || 3000;
 const adminRouter = require('./routes/admin.routes');
 const userRouter = require('./routes/user.routes');
 // const categoryRouter = require('./routes/category.routes');
@@ -21,6 +22,6 @@ app.use(bodyParser.json());
 app.use("/user", userRouter);
 app.use("/admin", adminRouter);
 
-app.listen(3000, () => {
-    console.log('Server is running on port no.3000');
+app.listen(port, () => {
+    console.log('Server is running on port no.' + port);
 });
